@@ -1,0 +1,1 @@
+ C:\\Users\\MINI\ HOT\\OneDrive\\Documentos\\2025\\mtc\\examen_mtc\\.dart_tool\\flutter_build\\95cffa9a459e195dcb1398450bf7f355\\dart_build_result.json: 
