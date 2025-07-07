@@ -1,1 +1,0 @@
- C:\\Users\\MINI\ HOT\\OneDrive\\Documentos\\2025\\mtc\\examen_mtc\\.dart_tool\\flutter_build\\dc559910150b31844cbb8ab62aa5b875\\native_assets.json: 

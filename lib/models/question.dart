@@ -15,14 +15,15 @@ class Question {
     this.imagen,
   });
 
+  // Factory constructor más robusto para manejar datos nulos desde el JSON
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      pregunta: json['pregunta'],
-      alternativas: Map<String, String>.from(json['alternativas']),
-      respuesta: json['respuesta'],
-      explicacion: json['explicacion'] ?? '',
-      categoria: json['categoria'],
-      imagen: json['imagen'],
+      pregunta: json['pregunta'] ?? 'Pregunta no disponible',
+      alternativas: Map<String, String>.from(json['alternativas'] ?? {}),
+      respuesta: json['respuesta'] ?? '',
+      explicacion: json['explicacion'] ?? 'No hay explicación disponible.',
+      categoria: json['categoria'] ?? 'Sin categoría',
+      imagen: json['imagen'], // Este campo ya puede ser nulo
     );
   }
 }

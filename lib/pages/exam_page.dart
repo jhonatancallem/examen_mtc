@@ -142,7 +142,17 @@ class _ExamPageState extends State<ExamPage> {
                   if (pregunta.imagen != null && pregunta.imagen!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: Image.network(pregunta.imagen!, height: 160),
+                      // --- CORRECCIÓN PARA CENTRAR LA IMAGEN ---
+                      child: Center( // Se envuelve la imagen en un widget Center
+                        child: Image.asset(
+                          pregunta.imagen!,
+                          height: 160,
+                          errorBuilder: (context, error, stackTrace) {
+                            // Muestra un ícono si la imagen no se encuentra en la ruta especificada
+                            return const Icon(Icons.image_not_supported, color: Colors.grey, size: 50);
+                          },
+                        ),
+                      ),
                     ),
                   Text(
                     pregunta.pregunta,

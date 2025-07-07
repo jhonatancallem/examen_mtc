@@ -9,10 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^4.8.4
-  firebase_core: ^2.24.2
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
+  provider: ^6.1.2
+  image_picker: ^1.1.2
+  path_provider: ^2.1.3
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +28,9 @@ flutter:
   assets:
     - lib/assets/img/
     - lib/assets/imgD/
+    - lib/assets/db/preguntas.json
+    - assets/preguntas/AI/
+    - assets/preguntas/aiic/
 
 flutter_icons:
   android: true
