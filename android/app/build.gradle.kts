@@ -1,21 +1,56 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
-    id("com.google.gms.google-services") // Firebase plugin
     id("kotlin-android")
-    id("dev.flutter.flutter-gradle-plugin")
+    // Correcto: El plugin de Flutter no se declara aquí.
+}
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
+val flutterVersionCode = localProperties.getProperty("flutter.versionCode") ?: "1"
+val flutterVersionName = localProperties.getProperty("flutter.versionName") ?: "1.0"
+
+val keyProperties = Properties()
+val keyPropertiesFile = rootProject.file("key.properties")
+if (keyPropertiesFile.exists()) {
+    keyProperties.load(FileInputStream(keyPropertiesFile))
 }
 
 android {
-    namespace = "com.example.examen_mtc"
-    compileSdk = 35
-    ndkVersion = "27.0.12077973"
+    namespace = "com.jhonatandev.examenmtc"
+    compileSdk = 34
+
+    signingConfigs {
+        create("release") {
+            if (keyPropertiesFile.exists()) {
+                keyAlias = keyProperties.getProperty("keyAlias")
+                keyPassword = keyProperties.getProperty("keyPassword")
+                storeFile = file(keyProperties.getProperty("storeFile"))
+                storePassword = keyProperties.getProperty("storePassword")
+            }
+        }
+    }
 
     defaultConfig {
-        applicationId = "com.example.examen_mtc"
+        applicationId = "com.jhonatandev.examenmtc"
         minSdk = 21
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 34
+        versionCode = flutterVersionCode.toInt()
+        versionName = flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            ndk {
+                debugSymbolLevel = "NONE"
+            }
+        }
     }
 
     compileOptions {
@@ -27,13 +62,11 @@ android {
         jvmTarget = "11"
     }
 
-    buildTypes {
-        release {
-            signingConfig = signingConfigs.getByName("debug")
-        }
+    sourceSets {
+        getByName("main").java.srcDirs("src/main/kotlin")
     }
 }
 
-flutter {
-    source = "../.."
-}
+// El bloque flutter { ... } ha sido eliminado.
+
+dependencies {}

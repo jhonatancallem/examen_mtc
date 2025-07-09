@@ -1,13 +1,15 @@
-import 'dart:io'; // Necesario para mostrar la imagen de perfil desde un archivo
+import 'dart:io';
 import 'package:examen_mtc/pages/exam_page.dart';
-import 'package:examen_mtc/pages/profile_page.dart'; // Importamos la nueva página de perfil
+import 'package:examen_mtc/pages/profile_page.dart';
 import 'package:examen_mtc/pages/study_category_page.dart';
 import 'package:examen_mtc/pages/simulacro_selector_page.dart';
 import 'package:examen_mtc/pages/study_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
-import '../providers/user_provider.dart'; // Importamos el provider del usuario
+import '../providers/user_provider.dart';
+import 'history_page.dart';
+import '../services/ad_service.dart';
 
 class HomePage extends StatefulWidget {
   final String? userName;
@@ -19,6 +21,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AdService _adService = AdService();
+
+  @override
+  void initState() {
+    super.initState();
+    _adService.loadPreExamInterstitialAd(); // <-- Precarga el primer anuncio al iniciar la página
+  }
+
   final categorias = [
     {
       "nombre": "A-I (A1)",
@@ -230,14 +240,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Historial'),
                 onTap: () {
                   Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.book_outlined),
-                title: const Text('Estudiar'),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const StudyPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryPage()));
                 },
               ),
               ListTile(

@@ -16,8 +16,7 @@ class QuestionService {
     // Si es la primera vez, cargamos el archivo JSON desde los assets.
     try {
       final jsonString = await rootBundle.loadString('lib/assets/db/preguntas.json');
-      // CORRECCIÓN: Ahora decodificamos directamente el mapa de preguntas,
-      // sin buscar una llave "preguntas" adicional.
+      // La estructura de tu JSON es un mapa de preguntas, no una lista.
       final preguntasMap = json.decode(jsonString) as Map<String, dynamic>;
 
       // Convertimos cada entrada del mapa en un objeto Question usando tu factory.
@@ -38,30 +37,28 @@ class QuestionService {
     }
   }
 
-  // Este es el método que tus páginas llamarán.
-  // Mantiene la misma lógica que tenías con Firebase.
+  // Este es el método que tus páginas de examen llamarán.
   Future<List<Question>> cargarPreguntas({required String categoria}) async {
     try {
-      // 1. Cargar todas las preguntas desde la caché o el archivo.
       final List<Question> allQuestions = await _loadAllQuestions();
 
       List<Question> preguntasParaJugar = [];
 
-      // 2. Filtrar por la categoría específica que se pide.
+      // Filtrar por la categoría específica que se pide.
       final preguntasCategoria = allQuestions.where((pregunta) {
         return pregunta.categoria.toUpperCase() == categoria.toUpperCase();
       }).toList();
 
       preguntasParaJugar.addAll(preguntasCategoria);
 
-      // 3. Filtrar por la categoría "Todas" y agregarlas.
+      // Filtrar por la categoría "Todas" y agregarlas.
       final preguntasGlobales = allQuestions.where((pregunta) {
         return pregunta.categoria.toUpperCase() == "TODAS";
       }).toList();
 
       preguntasParaJugar.addAll(preguntasGlobales);
 
-      // 4. Mezclar la lista final para que el orden sea aleatorio en cada examen.
+      // Mezclar la lista final para que el orden sea aleatorio en cada examen.
       preguntasParaJugar.shuffle();
 
       return preguntasParaJugar;
@@ -70,5 +67,14 @@ class QuestionService {
       print("Error al filtrar preguntas por categoría: $e");
       return [];
     }
+  }
+
+  // --- MÉTODO AÑADIDO ---
+  // Obtiene una lista de TODAS las preguntas sin filtrar por categoría.
+  // Es necesario para que el servicio de historial funcione.
+  Future<List<Question>> getAllQuestions() async {
+    final allQuestions = await _loadAllQuestions();
+    // Devolvemos una copia para evitar que la lista original en caché sea modificada.
+    return List<Question>.from(allQuestions);
   }
 }

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/question.dart';
 import '../services/question_service.dart';
 import 'resultados_page.dart';
+import '../services/history_service.dart';
+import '../models/exam_result.dart';
+import '../services/ad_service.dart'; // <-- 1. Importamos el servicio de anuncios
 
 class ExamPage extends StatefulWidget {
   final String categoria;
@@ -15,16 +18,20 @@ class ExamPage extends StatefulWidget {
 
 class _ExamPageState extends State<ExamPage> {
   final QuestionService _service = QuestionService();
+  final HistoryService _historyService = HistoryService();
+  final AdService _adService = AdService(); // <-- 2. Creamos una instancia del servicio
   List<Question> _preguntas = [];
   int _preguntaActual = 0;
   Map<int, String> _respuestasUsuario = {};
   late Timer _timer;
-  int _tiempoRestante = 40 * 60; // 40 minutos
+  int _tiempoRestante = 40 * 60;
 
   @override
   void initState() {
     super.initState();
     _iniciarExamen();
+    // 3. Precargamos el anuncio que se mostrará DESPUÉS del examen
+    _adService.loadPostExamInterstitialAd();
   }
 
   void _iniciarExamen() async {
@@ -72,19 +79,42 @@ class _ExamPageState extends State<ExamPage> {
     }
   }
 
-  void _finalizarExamen() {
+  void _finalizarExamen() async {
     _timer.cancel();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ResultadosPage(
-          preguntas: _preguntas,
-          respuestasUsuario: _respuestasUsuario,
-          tiempoUsado: 40 * 60 - _tiempoRestante,
-          fecha: DateTime.now(),
-        ),
-      ),
+
+    int puntaje = 0;
+    for (int i = 0; i < _preguntas.length; i++) {
+      if (_respuestasUsuario[i] == _preguntas[i].respuesta) {
+        puntaje++;
+      }
+    }
+
+    final resultado = ExamResult(
+      categoria: widget.categoria,
+      fecha: DateTime.now(),
+      puntaje: puntaje,
+      totalPreguntas: _preguntas.length,
+      tiempoUsado: (40 * 60) - _tiempoRestante,
+      preguntas: _preguntas,
+      respuestasUsuario: _respuestasUsuario,
     );
+
+    await _historyService.saveExamResult(resultado);
+
+    // 4. Mostramos el anuncio específico de Post-Examen
+    _adService.showPostExamInterstitialAd(onAdDismissed: () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ResultadosPage(
+            preguntas: _preguntas,
+            respuestasUsuario: _respuestasUsuario,
+            tiempoUsado: (40 * 60) - _tiempoRestante,
+            fecha: DateTime.now(),
+          ),
+        ),
+      );
+    });
   }
 
   @override
@@ -124,15 +154,12 @@ class _ExamPageState extends State<ExamPage> {
       ),
       body: Column(
         children: [
-          // ✅ Barra de progreso verde
           LinearProgressIndicator(
-            value: _respuestasUsuario.length / _preguntas.length,
+            value: (_preguntaActual + 1) / _preguntas.length,
             backgroundColor: Colors.grey[300],
             valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
             minHeight: 6,
           ),
-
-          // Pregunta y opciones
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -142,13 +169,12 @@ class _ExamPageState extends State<ExamPage> {
                   if (pregunta.imagen != null && pregunta.imagen!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      // --- CORRECCIÓN PARA CENTRAR LA IMAGEN ---
-                      child: Center( // Se envuelve la imagen en un widget Center
+                      child: Center(
                         child: Image.asset(
                           pregunta.imagen!,
                           height: 160,
+                          fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
-                            // Muestra un ícono si la imagen no se encuentra en la ruta especificada
                             return const Icon(Icons.image_not_supported, color: Colors.grey, size: 50);
                           },
                         ),
@@ -199,8 +225,6 @@ class _ExamPageState extends State<ExamPage> {
                     );
                   }),
                   const Spacer(),
-
-                  // ✅ Botones de navegación
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

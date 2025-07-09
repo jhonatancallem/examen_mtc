@@ -4,11 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/home_page.dart';
 import 'pages/nombre_page.dart';
 import 'providers/theme_provider.dart';
-import 'providers/user_provider.dart'; // Importamos el provider del usuario
+import 'providers/user_provider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   // Asegura que los componentes de Flutter estén listos antes de usarlos.
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
 
   // Accede a la memoria del dispositivo para ver si hay un nombre guardado.
   SharedPreferences prefs = await SharedPreferences.getInstance();
