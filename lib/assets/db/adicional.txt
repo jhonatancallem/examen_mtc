@@ -1,0 +1,323 @@
+"p228": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como explosivo es:",
+      "alternativas": {
+        "a": "Imagen de rombo naranja con explosión",
+        "b": "Imagen de rombo rojo con llama",
+        "c": "Imagen de rombo amarillo con llama sobre círculo",
+        "d": "Imagen de rombo blanco con calavera"
+      },
+      "respuesta": "a",
+      "explicacion": "El pictograma de una bomba explotando sobre un fondo naranja es el identificador universal para la Clase 1: Explosivos."
+    },
+    "p229": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligroso como líquidos inflamables son:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo blanco con llama",
+        "c": "Imagen de rombo azul con llama",
+        "d": "Imagen de rombo amarillo con llama"
+      },
+      "respuesta": "a",
+      "explicacion": "El pictograma de una llama sobre un fondo rojo identifica a la Clase 3: Líquidos inflamables."
+    },
+    "p230": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligrosos como gases inflamables son:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo verde con cilindro",
+        "c": "Imagen de rombo blanco con llama",
+        "d": "Imagen de rombo azul con llama"
+      },
+      "respuesta": "a",
+      "explicacion": "El pictograma de una llama identifica a la Clase 2, División 2.1: Gases inflamables. El color del fondo puede variar (generalmente rojo)."
+    },
+    "p231": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligrosos como sólido inflamable son:",
+      "alternativas": {
+        "a": "Imagen de rombo con franjas rojas y blancas con llama",
+        "b": "Imagen de rombo azul con llama",
+        "c": "Imagen de rombo amarillo con llama",
+        "d": "Imagen de rombo blanco con llama"
+      },
+      "respuesta": "a",
+      "explicacion": "El pictograma de una llama sobre un fondo de franjas verticales rojas y blancas identifica a la Clase 4, División 4.1: Sólidos inflamables."
+    },
+    "p232": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia comburente es:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo blanco con calavera",
+        "c": "Imagen de rombo amarillo con llama sobre círculo",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "c",
+      "explicacion": "El pictograma de una llama sobre un círculo en un fondo amarillo identifica a la Clase 5, División 5.1: Sustancias comburentes."
+    },
+    "p233": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como peróxidos orgánicos es:",
+      "alternativas": {
+        "a": "Imagen de rombo amarillo con llama sobre círculo",
+        "b": "Imagen de rombo rojo y amarillo con llama",
+        "c": "Imagen de rombo blanco con calavera",
+        "d": "Imagen de rombo rojo con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/233.png",
+      "explicacion": "El pictograma de una llama sobre un fondo mitad rojo y mitad amarillo identifica a la Clase 5, División 5.2: Peróxidos orgánicos."
+    },
+    "p234": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia tóxica es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo con tres crescientes sobre un círculo",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo blanco con tubos de ensayo vertiendo líquido"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/234.png",
+      "explicacion": "El pictograma de una calavera sobre dos tibias cruzadas en un fondo blanco identifica a la Clase 6, División 6.1: Sustancias tóxicas."
+    },
+    "p235": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia infecciosa es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo blanco con tres crescientes sobre un círculo",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Ninguna de las anteriores"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/235.png",
+      "explicacion": "El pictograma de tres crescientes sobre un círculo en un fondo blanco identifica a la Clase 6, División 6.2: Sustancias infecciosas."
+    },
+    "p236": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "los rotulos que identifican al material peligroso como radioactivo son:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo amarillo y blanco con símbolo de trébol de radiación",
+        "c": "Imagen de rombo blanco con tres crescientes sobre un círculo",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/236.png",
+      "explicacion": "El pictograma del trébol de radiación sobre un fondo mitad amarillo y mitad blanco identifica a la Clase 7: Materiales radiactivos."
+    },
+    "p237": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como corrosivo es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo mitad blanco y mitad negro con tubos de ensayo vertiendo líquido",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/237.png",
+      "explicacion": "El pictograma de un líquido vertiéndose de dos tubos de ensayo y corroyendo una superficie y una mano, sobre un fondo mitad blanco y mitad negro, identifica a la Clase 8: Sustancias corrosivas."
+    },
+    "p238": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancias y objetos varios, incluido las sustancias peligrosas para el medio ambiente es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo con franjas verticales negras y blancas en la mitad superior",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/238.png",
+      "explicacion": "El pictograma de siete franjas verticales negras sobre un fondo blanco en la mitad superior identifica a la Clase 9: Sustancias y objetos peligrosos varios."
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"p284": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como explosivo es:",
+      "alternativas": {
+        "a": "Imagen de rombo naranja con explosión",
+        "b": "Imagen de rombo rojo con llama",
+        "c": "Imagen de rombo amarillo con llama sobre círculo",
+        "d": "Imagen de rombo blanco con calavera"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/228.png",
+      "explicacion": "El pictograma de una bomba explotando sobre un fondo naranja es el identificador universal para la Clase 1: Explosivos."
+    },
+    "p285": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligroso como líquidos inflamables son:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo blanco con llama",
+        "c": "Imagen de rombo azul con llama",
+        "d": "Imagen de rombo amarillo con llama"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/229.png",
+      "explicacion": "El pictograma de una llama sobre un fondo rojo identifica a la Clase 3: Líquidos inflamables."
+    },
+    "p286": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligrosos como gases inflamables son:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo verde con cilindro",
+        "c": "Imagen de rombo blanco con llama",
+        "d": "Imagen de rombo azul con llama"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/230.png",
+      "explicacion": "El pictograma de una llama identifica a la Clase 2, División 2.1: Gases inflamables. El color del fondo puede variar (generalmente rojo)."
+    },
+    "p287": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "Los rótulos que identifican al material peligrosos como sólido inflamable son:",
+      "alternativas": {
+        "a": "Imagen de rombo con franjas rojas y blancas con llama",
+        "b": "Imagen de rombo azul con llama",
+        "c": "Imagen de rombo amarillo con llama",
+        "d": "Imagen de rombo blanco con llama"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/231.png",
+      "explicacion": "El pictograma de una llama sobre un fondo de franjas verticales rojas y blancas identifica a la Clase 4, División 4.1: Sólidos inflamables."
+    },
+    "p288": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia comburente es:",
+      "alternativas": {
+        "a": "Imagen de rombo rojo con llama",
+        "b": "Imagen de rombo blanco con calavera",
+        "c": "Imagen de rombo amarillo con llama sobre círculo",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "c",
+      "imagen": "assets/preguntas/aiic/232.png",
+      "explicacion": "El pictograma de una llama sobre un círculo en un fondo amarillo identifica a la Clase 5, División 5.1: Sustancias comburentes."
+    },
+    "p289": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como peróxidos orgánicos es:",
+      "alternativas": {
+        "a": "Imagen de rombo amarillo con llama sobre círculo",
+        "b": "Imagen de rombo rojo y amarillo con llama",
+        "c": "Imagen de rombo blanco con calavera",
+        "d": "Imagen de rombo rojo con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/233.png",
+      "explicacion": "El pictograma de una llama sobre un fondo mitad rojo y mitad amarillo identifica a la Clase 5, División 5.2: Peróxidos orgánicos."
+    },
+    "p290": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia tóxica es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo con tres crescientes sobre un círculo",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo blanco con tubos de ensayo vertiendo líquido"
+      },
+      "respuesta": "a",
+      "imagen": "assets/preguntas/aiic/234.png",
+      "explicacion": "El pictograma de una calavera sobre dos tibias cruzadas en un fondo blanco identifica a la Clase 6, División 6.1: Sustancias tóxicas."
+    },
+    "p291": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancia infecciosa es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo blanco con tres crescientes sobre un círculo",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Ninguna de las anteriores"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/235.png",
+      "explicacion": "El pictograma de tres crescientes sobre un círculo en un fondo blanco identifica a la Clase 6, División 6.2: Sustancias infecciosas."
+    },
+    "p292": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "los rotulos que identifican al material peligroso como radioactivo son:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo amarillo y blanco con símbolo de trébol de radiación",
+        "c": "Imagen de rombo blanco con tres crescientes sobre un círculo",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/236.png",
+      "explicacion": "El pictograma del trébol de radiación sobre un fondo mitad amarillo y mitad blanco identifica a la Clase 7: Materiales radiactivos."
+    },
+    "p293": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como corrosivo es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo mitad blanco y mitad negro con tubos de ensayo vertiendo líquido",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/237.png",
+      "explicacion": "El pictograma de un líquido vertiéndose de dos tubos de ensayo y corroyendo una superficie y una mano, sobre un fondo mitad blanco y mitad negro, identifica a la Clase 8: Sustancias corrosivas."
+    },
+    "p294": {
+      "categoria": "AIIIC",
+      "tema": "Mercancías peligrosas",
+      "pregunta": "El rótulo que identifica al material peligroso como sustancias y objetos varios, incluido las sustancias peligrosas para el medio ambiente es:",
+      "alternativas": {
+        "a": "Imagen de rombo blanco con calavera y tibias cruzadas",
+        "b": "Imagen de rombo con franjas verticales negras y blancas en la mitad superior",
+        "c": "Imagen de rombo amarillo y blanco con símbolo de radiación",
+        "d": "Imagen de rombo con franjas rojas y blancas con llama"
+      },
+      "respuesta": "b",
+      "imagen": "assets/preguntas/aiic/238.png",
+      "explicacion": "El pictograma de siete franjas verticales negras sobre un fondo blanco en la mitad superior identifica a la Clase 9: Sustancias y objetos peligrosos varios."
+    },
