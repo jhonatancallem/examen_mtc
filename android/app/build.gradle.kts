@@ -17,7 +17,6 @@ android {
     namespace = "com.jhonatandev.examenmtc"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -39,12 +38,12 @@ android {
 
     signingConfigs {
         create("release") {
-            if (keystorePropertiesFile.exists()) {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String
-            }
+            keyAlias = "my-key-alias" // <-- OJO: Usa tu alias real aquí
+            keyPassword = "91890000"
+            // ¡IMPORTANTE! Usa la ruta absoluta y correcta a tu archivo.
+            // Usa barras inclinadas '/' incluso en Windows.
+            storeFile = file("C:/claves/mtc/my-release-key.jks") // <-- CAMBIA ESTO por tu ruta real
+            storePassword = "91890000"
         }
     }
 

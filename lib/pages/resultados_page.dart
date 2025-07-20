@@ -29,11 +29,14 @@ class _ResultadosPageState extends State<ResultadosPage> {
   void initState() {
     super.initState();
     // CORRECCIÓN: En esta página, solo necesitamos precargar el anuncio recompensado.
+    // El anuncio intersticial ya se mostró al finalizar el examen.
     _adService.loadRewardedInterstitialAd();
   }
 
   void _desbloquearExplicaciones() {
+    // CORRECCIÓN: Llamamos a la función correcta para el anuncio recompensado.
     _adService.showRewardedInterstitialAd(
+
       onAdDismissed: () {
         print("El usuario cerró el anuncio sin obtener la recompensa.");
       },
@@ -74,7 +77,6 @@ class _ResultadosPageState extends State<ResultadosPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // Se pasan los valores calculados al Header
           _buildHeader(aprobado, correctas, incorrectas),
           const Divider(height: 40),
           _buildReviewSection(),
@@ -84,7 +86,6 @@ class _ResultadosPageState extends State<ResultadosPage> {
   }
 
   Widget _buildHeader(bool aprobado, int correctas, int incorrectas) {
-    // El cálculo del puntaje ahora se hace aquí dentro para evitar errores de tipo
     final puntaje = widget.preguntas.isNotEmpty ? (correctas / widget.preguntas.length * 100) : 0.0;
 
     return Center(
@@ -193,7 +194,6 @@ class _ResultadosPageState extends State<ResultadosPage> {
                         child: Image.asset(
                           pregunta.imagen!,
                           height: 160,
-                          // CORRECCIÓN: Se añade BoxFit.contain para que la imagen no se corte
                           fit: BoxFit.contain,
                           errorBuilder: (c, e, s) => const Icon(Icons.error_outline, color: Colors.red),
                         ),
