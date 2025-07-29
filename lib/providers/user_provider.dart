@@ -34,4 +34,13 @@ class UserProvider with ChangeNotifier {
 
     notifyListeners();
   }
+  Future<void> clearUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('nombre');
+    await prefs.remove('profile_image_path');
+
+    _userName = null;
+    _profileImagePath = null;
+    notifyListeners();
+  }
 }

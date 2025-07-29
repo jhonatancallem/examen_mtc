@@ -13,46 +13,119 @@ class StudyCategoryPage extends StatefulWidget {
   });
 
   @override
-  State<StudyCategoryPage> createState() => _StudyCategoryPageState();
+  _StudyCategoryPageState createState() => _StudyCategoryPageState();
 }
 
 class _StudyCategoryPageState extends State<StudyCategoryPage> {
-  final QuestionService _service = QuestionService();
-  List<Question> _preguntas = [];
-  bool _cargando = true;
+  final QuestionService _questionService = QuestionService();
+  late Future<List<Question>> _questionsFuture;
 
   @override
   void initState() {
     super.initState();
-    _cargarPreguntas();
-  }
-
-  Future<void> _cargarPreguntas() async {
-    final preguntas = await _service.cargarPreguntas(categoria: widget.categoriaCodigo);
-    setState(() {
-      _preguntas = preguntas;
-      _cargando = false;
-    });
+    _questionsFuture = _questionService.cargarPreguntas(categoria: widget.categoriaCodigo);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Estudio: ${widget.categoriaNombre}"),
+        title: Text('Estudio: ${widget.categoriaNombre}'),
       ),
-      body: _cargando
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-        itemCount: _preguntas.length,
-        itemBuilder: (context, index) {
-          final pregunta = _preguntas[index];
-          return Card(
-            margin: const EdgeInsets.all(10),
-            child: ListTile(
-              title: Text(pregunta.pregunta),
-              subtitle: Text("Respuesta correcta: ${pregunta.respuesta}"),
-            ),
+      body: FutureBuilder<List<Question>>(
+        future: _questionsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No se encontraron preguntas para esta categoría.'));
+          }
+
+          final questions = snapshot.data!;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(12.0),
+            itemCount: questions.length,
+            itemBuilder: (context, index) {
+              final question = questions[index];
+
+              return Card(
+                margin: const EdgeInsets.only(bottom: 16),
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: ExpansionTile(
+                  tilePadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  title: Text(
+                    '${index + 1}. ${question.pregunta}',
+                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                  ),
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      color: Colors.grey.shade50,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (question.imagen != null && question.imagen!.isNotEmpty)
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: Image.asset(
+                                  question.imagen!,
+                                  height: 150,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (c, e, s) => const Icon(Icons.error_outline, color: Colors.red),
+                                ),
+                              ),
+                            ),
+                          ...question.alternativas.entries.map((entry) {
+                            final isCorrect = entry.key == question.respuesta;
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 4),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: isCorrect ? Colors.green.withOpacity(0.1) : Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: isCorrect ? Colors.green : Colors.grey.shade300,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    isCorrect ? Icons.check_circle : Icons.radio_button_off,
+                                    color: isCorrect ? Colors.green : Colors.grey,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(child: Text(entry.value)),
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          if (question.explicacion.isNotEmpty) ...[
+                            const Divider(height: 24, thickness: 1),
+                            const Text(
+                                'Explicación:',
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                                question.explicacion,
+                                style: TextStyle(color: Colors.grey.shade800, height: 1.4)
+                            ),
+                          ]
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),

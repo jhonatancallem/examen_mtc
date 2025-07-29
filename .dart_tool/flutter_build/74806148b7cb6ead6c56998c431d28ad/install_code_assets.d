@@ -1,1 +1,0 @@
- C:\\proyectos\ dev\\examen_mtc\\.dart_tool\\flutter_build\\74806148b7cb6ead6c56998c431d28ad\\native_assets.json: 

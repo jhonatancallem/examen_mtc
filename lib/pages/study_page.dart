@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../services/question_service.dart';
 import 'study_category_page.dart';
+import 'topic_questions_page.dart';
 
 class StudyPage extends StatelessWidget {
   const StudyPage({super.key});
@@ -12,11 +14,17 @@ class StudyPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Estudio'),
           backgroundColor: Colors.blue,
-          actions: const [
-            Icon(Icons.home),
-            SizedBox(width: 16),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+            ),
           ],
           bottom: const TabBar(
+            indicatorColor: Colors.white,
+            indicatorWeight: 3.0,
             tabs: [
               Tab(text: 'Por Temas'),
               Tab(text: 'Por Categorías'),
@@ -26,7 +34,7 @@ class StudyPage extends StatelessWidget {
         body: const TabBarView(
           children: [
             _TemasTab(),
-            _CategoriasTab(),
+            _CategoriasTab(), // Tu widget de categorías se mantiene intacto
           ],
         ),
       ),
@@ -34,56 +42,94 @@ class StudyPage extends StatelessWidget {
   }
 }
 
-class _TemasTab extends StatelessWidget {
+// Widget para la pestaña "Por Temas", ahora con un diseño mejorado
+class _TemasTab extends StatefulWidget {
   const _TemasTab();
 
   @override
-  Widget build(BuildContext context) {
-    final temas = [
-      {
-        'titulo': 'Normas de Tránsito',
-        'descripcion': 'Reglamento y leyes sobre circulación vial',
-      },
-      {
-        'titulo': 'Señales de Tránsito',
-        'descripcion': 'Interpretación de las diferentes señales viales',
-      },
-      {
-        'titulo': 'Seguridad Vial',
-        'descripcion': 'Medidas para una conducción segura',
-      },
-      {
-        'titulo': 'Límites de Velocidad',
-        'descripcion': 'Límites de velocidad según las vías y vehículos',
-      },
-    ];
+  State<_TemasTab> createState() => _TemasTabState();
+}
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: temas.length,
-      itemBuilder: (context, index) {
-        final tema = temas[index];
-        return Card(
-          margin: const EdgeInsets.only(bottom: 16),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          elevation: 3,
-          child: ListTile(
-            title: Text(
-              tema['titulo']!,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(tema['descripcion']!),
-            trailing: const Icon(Icons.arrow_forward_ios),
-            onTap: () {
-              // Acción futura
-            },
-          ),
+class _TemasTabState extends State<_TemasTab> {
+  final QuestionService _questionService = QuestionService();
+  late Future<List<String>> _topicsFuture;
+
+  // Mapa para añadir descripciones e íconos a los temas del JSON
+  final Map<String, Map<String, dynamic>> topicDetails = {
+    'Reglamento de Tránsito y Manual de Dispositivos de Control de Tránsito': {
+      'descripcion': 'Leyes, reglas y señales de circulación vial.',
+      'icon': Icons.traffic_outlined,
+    },
+    'Mecánica para la conducción': {
+      'descripcion': 'Conocimientos básicos del vehículo.',
+      'icon': Icons.build_outlined,
+    },
+    'Primeros Auxilios': {
+      'descripcion': 'Actuación en caso de accidentes.',
+      'icon': Icons.medical_services_outlined,
+    },
+    // Puedes añadir más temas de tu JSON aquí
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _topicsFuture = _questionService.getUniqueTopics();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<String>>(
+      future: _topicsFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(child: Text('No se encontraron temas.'));
+        }
+
+        final temas = snapshot.data!;
+
+        return ListView.builder(
+          padding: const EdgeInsets.all(16),
+          itemCount: temas.length,
+          itemBuilder: (context, index) {
+            final tema = temas[index];
+            final details = topicDetails[tema] ?? {'descripcion': 'Estudia las preguntas de este tema.', 'icon': Icons.book_outlined};
+
+            return Card(
+              margin: const EdgeInsets.only(bottom: 16),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              elevation: 4,
+              shadowColor: Colors.black.withOpacity(0.2),
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                leading: Icon(details['icon'] as IconData, color: Colors.blue.shade700, size: 30),
+                title: Text(
+                  tema,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                ),
+                subtitle: Text(details['descripcion'] as String),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 18),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TopicQuestionsPage(topic: tema),
+                    ),
+                  );
+                },
+              ),
+            );
+          },
         );
       },
     );
   }
 }
 
+// Tu widget para la pestaña "Por Categorías", con un diseño refinado
 class _CategoriasTab extends StatelessWidget {
   const _CategoriasTab();
 
@@ -109,8 +155,10 @@ class _CategoriasTab extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.only(bottom: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          elevation: 3,
+          elevation: 4,
+          shadowColor: Colors.black.withOpacity(0.2),
           child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             leading: CircleAvatar(
               backgroundColor: cat["color"] as Color,
               child: Text(
@@ -122,19 +170,19 @@ class _CategoriasTab extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text(cat["nombre"] as String),
+            title: Text(cat["nombre"] as String, style: const TextStyle(fontWeight: FontWeight.w500)),
             subtitle: Text(cat["detalle"] as String),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 18),
             onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StudyCategoryPage(
-                      categoriaCodigo: cat["codigo"] as String,
-                      categoriaNombre: cat["nombre"] as String,
-                    ),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => StudyCategoryPage(
+                    categoriaCodigo: cat["codigo"] as String,
+                    categoriaNombre: cat["nombre"] as String,
                   ),
-                );// Acción al seleccionar categoría
+                ),
+              );
             },
           ),
         );

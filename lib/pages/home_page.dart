@@ -10,6 +10,8 @@ import '../providers/theme_provider.dart';
 import '../providers/user_provider.dart';
 import 'history_page.dart';
 import '../services/ad_service.dart';
+import 'about_page.dart';
+import 'settings_page.dart';
 
 class HomePage extends StatefulWidget {
   final String? userName;
@@ -265,6 +267,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Configuraciones'),
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsPage()));
                 },
               ),
               ListTile(
@@ -272,6 +275,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Acerca de'),
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage()));
                 },
               ),
             ],
